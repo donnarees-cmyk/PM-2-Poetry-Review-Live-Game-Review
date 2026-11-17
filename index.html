@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mrs. Rees' PM 2 Review: Follow Along</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff8ec;--ink:#1f2340;--muted:#5b5f7a;--line:#ece3d3;--good:#16a34a;--goodbg:#dcfce7;--bad:#dc2626;--badbg:#fee2e2}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:Nunito,system-ui,sans-serif;font-size:18px;min-height:100vh;
+  background-image:radial-gradient(circle at 8% 8%,#ffe7c2 0 120px,transparent 121px),radial-gradient(circle at 95% 25%,#e0e7ff 0 150px,transparent 151px),radial-gradient(circle at 15% 95%,#fce7f3 0 140px,transparent 141px);background-attachment:fixed}
+h1,h2,h3{font-family:Fredoka,Nunito,sans-serif;margin:0}
+button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.wrap{max-width:860px;margin:0 auto;padding:16px}
+header{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}
+.brand{display:flex;gap:10px;align-items:center}
+.badge{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,#7c3aed,#db2777);display:grid;place-items:center;font-size:22px;box-shadow:0 4px 0 #5b21b6}
+.brand h1{font-size:20px;line-height:1.1}.brand small{color:var(--muted);font-weight:800;font-size:13px;display:block}
+.score{background:#fff;border:2px solid var(--line);border-radius:999px;padding:6px 14px;font-weight:800;font-size:15px}
+.card{background:#fff;border:2px solid var(--line);border-radius:22px;padding:20px;box-shadow:0 6px 0 var(--line)}
+.center{text-align:center}
+.tip{display:flex;gap:12px;align-items:center;background:#fff;border:2px dashed #a78bfa;border-radius:18px;padding:12px 16px;font-weight:800;margin-bottom:14px}
+.tip span{font-size:30px}
+.st{margin:16px 0 8px;font-family:Fredoka;font-size:20px;display:flex;gap:8px;align-items:center}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(86px,1fr));gap:10px}
+.qb{border:none;border-radius:16px;padding:14px 4px;color:#fff;font-family:Fredoka;font-size:26px;box-shadow:0 5px 0 rgba(0,0,0,.2);position:relative}
+.qb small{display:block;font-family:Nunito;font-size:12px;font-weight:800;opacity:.95}
+.qb.done{opacity:.55}
+.btn{border:none;border-radius:16px;padding:14px 22px;font-weight:800;font-size:19px;color:#fff;background:#7c3aed;box-shadow:0 5px 0 rgba(0,0,0,.22)}
+.btn:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(0,0,0,.22)}
+.btn.ghost{background:#fff;color:var(--ink);border:2px solid var(--line);box-shadow:0 4px 0 var(--line)}
+.btn.green{background:#16a34a}
+.tag{display:inline-block;color:#fff;font-weight:800;border-radius:999px;padding:4px 12px;font-size:14px}
+.qn{font-family:Fredoka;font-size:30px;margin:8px 0 2px}
+.qtext{font-size:21px;font-weight:800;margin:8px 0 14px}
+.ch{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;background:#fff;border:3px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px;font-weight:700;font-size:19px;color:var(--ink)}
+.ch .L{flex:0 0 36px;height:36px;border-radius:10px;background:#f1f5f9;display:grid;place-items:center;font-family:Fredoka;font-size:19px}
+.ch.mine{border-color:#7c3aed;background:#f5f3ff}.ch.mine .L{background:#7c3aed;color:#fff}
+.ch.right{border-color:var(--good);background:var(--goodbg)}.ch.right .L{background:var(--good);color:#fff}
+.ch.wrong{border-color:var(--bad);background:var(--badbg)}.ch.wrong .L{background:var(--bad);color:#fff}
+.ch[disabled]{cursor:default}
+.lock{margin-top:12px;border-radius:16px;padding:14px;font-weight:800;text-align:center;background:#f5f3ff;border:2px dashed #7c3aed}
+.fb{margin-top:12px;border-radius:16px;padding:14px 16px;font-weight:700}
+.fb.good{background:var(--goodbg);border:2px solid var(--good)}.fb.bad{background:#fff7ed;border:2px solid #fb923c}
+.fb b{font-family:Fredoka;font-size:21px;display:block}
+.row{display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;margin-top:14px}
+details.poem{margin-top:12px;background:#fffdf7;border:2px solid var(--line);border-radius:16px;padding:10px 14px}
+details.poem summary{font-weight:800;cursor:pointer}
+details.poem ol{list-style:none;padding:0;margin:8px 0 0;font-family:Georgia,serif;font-size:18px;line-height:1.5}
+details.poem li{display:grid;grid-template-columns:28px 1fr;gap:6px}
+details.poem li .n{color:#a3a3a3;font-family:Nunito;font-size:12px;font-weight:800;text-align:right;padding-top:4px}
+details.poem li.gap{height:10px}
+.big{font-size:60px}
+.pts{font-family:Fredoka;font-size:56px;color:#7c3aed}
+.pill{display:inline-block;color:#fff;font-weight:800;border-radius:999px;padding:6px 14px;margin:4px;font-size:15px}
+footer{text-align:center;color:var(--muted);font-size:13px;font-weight:700;margin-top:24px}
+footer button{background:none;border:none;color:var(--muted);text-decoration:underline;font-weight:700;font-size:13px}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:60}
+</style>
+</head>
+<body>
+<canvas id="confetti"></canvas>
+<div class="wrap">
+  <header>
+    <div class="brand"><div class="badge">📜</div><div><h1>Mrs. Rees' PM 2 Review</h1><small>Poetry Power-Up · Follow Along</small></div></div>
+    <div class="score" id="score"></div>
+  </header>
+  <main id="app"></main>
+  <footer>Your answers save on this iPad. ✅ If you leave, just come back to this page.<br>© 2026 Donna Rees. For classroom use.<br><button id="reset">Start over</button></footer>
+</div>
+<script>
+// Shared content for Mrs. Rees' PM 2 Poetry Review (student page + teacher slides)
+const REVIEW = {
+  title: "Mrs. Rees' PM 2 Review",
+  subtitle: "Poetry Power-Up",
+  stations: [
+    {
+      id: "s1", icon: "🏛️", name: "Poetic Forms & Structure", standard: "ELA.6.R.1.4",
+      color: "#7c3aed",
+      teach: [
+        { term: "Stanza", def: "A group of lines in a poem, like a paragraph in a story." },
+        { term: "Line break", def: "Where the poet ends a line. A break can make you pause and pay attention to a word." },
+        { term: "Rhyme scheme", def: "The pattern of end rhymes, labeled with letters: ABAB, AABB, AABBA." },
+        { term: "Free verse", def: "No regular rhyme or rhythm. Line lengths change. The poet uses line breaks and spacing for effect." },
+        { term: "Sonnet", def: "14 lines. Often ABAB CDCD EFEF GG. The last two lines (a couplet) often make a turn, or shift." },
+        { term: "Haiku", def: "3 lines with 5, 7, and 5 syllables. Usually about nature or a single moment." },
+        { term: "Limerick", def: "5 lines, AABBA rhyme scheme, bouncy rhythm, and a funny ending." },
+        { term: "Ballad", def: "Tells a story in 4-line stanzas and often repeats a line (a refrain)." },
+        { term: "Villanelle", def: "19 lines: five 3-line stanzas (tercets) and one 4-line stanza (a quatrain) at the end. It uses only two rhyme sounds. Lines 1 and 3 repeat over and over as refrains, then come together at the end." },
+        { term: "FAST tip", def: "FAST asks HOW the structure adds to meaning. Ask yourself: why did the poet break, repeat, or shift here?" }
+      ],
+      poems: ["p1", "p2", "p6"]
+    },
+    {
+      id: "s2", icon: "🎨", name: "Figurative Language", standard: "ELA.6.R.3.1",
+      color: "#db2777",
+      teach: [
+        { term: "Simile", def: "Compares two unlike things using like or as. \"The moon was like a lantern.\"" },
+        { term: "Metaphor", def: "Compares by saying one thing IS another. \"The moon was a lantern.\"" },
+        { term: "Personification", def: "Gives human actions or feelings to something that is not human. \"The wind whispered.\"" },
+        { term: "Hyperbole", def: "A huge exaggeration for effect. \"I've told you a million times!\"" },
+        { term: "Idiom", def: "A saying that does not mean what the words say. \"It's raining cats and dogs.\"" },
+        { term: "Alliteration", def: "Repeating the same beginning sound. \"Silly snakes slide slowly.\"" },
+        { term: "Onomatopoeia", def: "A word that imitates a sound. Buzz, crash, sizzle." },
+        { term: "Imagery", def: "Words that help you see, hear, smell, taste, or feel something." },
+        { term: "FAST tip", def: "Naming the device is step one. FAST asks what it SHOWS: the feeling, the picture, the meaning." }
+      ],
+      poems: ["p3"]
+    },
+    {
+      id: "s3", icon: "🗣️", name: "Theme & Speaker", standard: "ELA.6.R.1.2 · ELA.6.R.1.3",
+      color: "#0891b2",
+      teach: [
+        { term: "Speaker", def: "The voice telling the poem. The speaker is not always the poet." },
+        { term: "Point of view", def: "How the speaker sees things. Look for I, me, my, and what the speaker thinks, feels, and does." },
+        { term: "Topic vs. theme", def: "Topic is one or two words, like friendship. Theme is a full sentence lesson, like: True friends stand by you when things get hard." },
+        { term: "Theme clues", def: "Check the title, what the speaker learns, any change from beginning to end, repeated words, and the last lines." },
+        { term: "FAST tip", def: "A strong theme answer fits the WHOLE poem, not just one line, and it is about life, not just the characters." }
+      ],
+      poems: ["p4"]
+    },
+    {
+      id: "s4", icon: "🎭", name: "Tone, Mood & Word Choice", standard: "ELA.6.R.1.4 · ELA.6.V.1.3",
+      color: "#ea580c",
+      teach: [
+        { term: "Tone", def: "The speaker's attitude toward the subject. Examples: hopeful, wistful, playful, bitter, proud." },
+        { term: "Mood", def: "The feeling the reader gets. Examples: peaceful, lonely, tense, cheerful." },
+        { term: "Connotation", def: "The feeling a word carries. Home and house mean the same thing, but home feels warmer." },
+        { term: "Word choice", def: "Poets pick words on purpose. One changed word, like slam instead of close, can change the whole tone." },
+        { term: "FAST tip", def: "Prove tone with exact words from the poem. Ask: which words carry the feeling?" }
+      ],
+      poems: ["p5"]
+    }
+  ],
+  poems: {
+    p1: { title: "The Last Bell", form: "sonnet", lines: [
+      "All morning long the hallway hums with sound,",
+      "with lockers slamming shut and sneakers' squeak;",
+      "the clock above the door goes round and round,",
+      "and every minute stretches out a week.",
+      "I watch the sunlight crawling down the wall,",
+      "I count the ceiling tiles from one to ten,",
+      "I hear the pencil sharpener's grinding call,",
+      "then turn my page and start to count again.",
+      "But when at last the final bell rings loud,",
+      "the doors swing wide like wings about to fly;",
+      "we pour outside, a noisy, happy crowd,",
+      "beneath a wide and cloudless autumn sky.",
+      "The day that dragged its feet now runs away,",
+      "and part of me already wants to stay."
+    ], numbered: true },
+    p2: { title: "Grandma's Hands", form: "free verse", lines: [
+      "Grandma's hands",
+      "are maps,",
+      "blue rivers of veins",
+      "winding past",
+      "the mountains of her knuckles.",
+      "",
+      "They knead bread at dawn,",
+      "they braid my hair",
+      "too tight,",
+      "they wave goodbye",
+      "from the porch",
+      "until the car turns the corner,",
+      "and even then,",
+      "I think,",
+      "they keep waving."
+    ], numbered: true },
+    p6: { title: "Take My Time", form: "villanelle", lines: [
+      "I read each line and take my time;",
+      "my pencil waits, my thoughts are clear.",
+      "The words will help me make the climb.",
+      "",
+      "Each poem hums its hidden rhyme,",
+      "and if I listen, I will hear.",
+      "I read each line and take my time.",
+      "",
+      "A tricky choice may seem sublime,",
+      "but proof will make the truth appear.",
+      "The words will help me make the climb.",
+      "",
+      "My heart may race, the clock may chime,",
+      "but I have practiced all this year.",
+      "I read each line and take my time.",
+      "",
+      "My mind is ready, sharp, and prime;",
+      "I lock away my doubt and fear.",
+      "The words will help me make the climb.",
+      "",
+      "So when the test begins this time,",
+      "I'll trust the skills that brought me here:",
+      "I read each line and take my time.",
+      "The words will help me make the climb."
+    ], numbered: true },
+    p3: { title: "Storm Night", lines: [
+      "The thunder grumbles like a hungry bear",
+      "pacing the roof above my bed.",
+      "Rain drums its fingers on the glass,",
+      "tap, tap, tap,",
+      "impatient to come in.",
+      "The wind is a wolf tonight,",
+      "howling down the chimney,",
+      "and I have pulled my blanket",
+      "a million miles over my head.",
+      "By morning the storm has slunk away,",
+      "silent, sorry,",
+      "leaving the street",
+      "shining like a freshly washed plate."
+    ], numbered: true },
+    p4: { title: "The Tryout", lines: [
+      "I practiced every afternoon",
+      "until the porch light buzzed on,",
+      "the ball slapping the garage door",
+      "a thousand times, two thousand.",
+      "",
+      "On tryout day my hands were water.",
+      "I missed the first shot.",
+      "I missed the second.",
+      "Coach wrote something on her clipboard",
+      "and didn't look up.",
+      "",
+      "Walking home, I kicked a can",
+      "the whole length of Maple Street.",
+      "Then I stopped. Picked it up.",
+      "Tossed it, perfect arc, into the bin.",
+      "",
+      "Tomorrow, the garage door.",
+      "Tomorrow, a thousand more."
+    ], numbered: true },
+    p5: { title: "Moving Day", lines: [
+      "The boxes stand like strangers in the hall,",
+      "taped shut, labeled in black marker:",
+      "KITCHEN. BOOKS. MISC.",
+      "My room echoes now.",
+      "Even my voice sounds borrowed.",
+      "I trace the pencil marks on the doorframe,",
+      "age four, age seven, age ten,",
+      "the only part of me",
+      "the new family will keep.",
+      "Outside, the truck growls, ready.",
+      "I take one last look,",
+      "then close the door gently,",
+      "the way you'd close a book",
+      "you aren't finished reading."
+    ], numbered: true }
+  },
+  questions: [
+    // Station 1
+    { s: "s1", poem: "p1", q: "Read \"The Last Bell.\" Which form is this poem?",
+      c: ["A ballad, because it tells a story with a repeated refrain", "A sonnet, because it has 14 lines, a regular rhyme scheme, and ends with a couplet", "Free verse, because it has no regular rhyme or rhythm", "A limerick, because it is about a funny moment at school"],
+      a: 1, why: "Count the lines: 14. The rhymes follow ABAB CDCD EFEF GG, and lines 13 and 14 rhyme as a couplet. That is a sonnet." },
+    { s: "s1", poem: "p1", q: "What is the rhyme scheme of lines 1 through 4?",
+      c: ["AABB", "ABBA", "ABAB", "ABCB"],
+      a: 2, why: "sound (A), squeak (B), round (A), week (B). The pattern is ABAB." },
+    { s: "s1", poem: "p1", q: "Lines 5 through 8 begin with \"I watch,\" \"I count,\" \"I hear,\" and \"then turn.\" How does this repeated structure add to the poem's meaning?",
+      c: ["It shows the speaker doing the same dull things over and over, so the day feels slow", "It shows that the speaker is a careful student who follows directions", "It shows that the speaker is excited to begin a new activity", "It shows that the speaker is confused about what to do next"],
+      a: 0, why: "The repeating pattern feels like a loop. It makes the reader feel how slowly and boringly the time is passing for the speaker." },
+    { s: "s1", poem: "p1", q: "How do lines 13 and 14, the final couplet, contribute to the poem?",
+      c: ["They repeat the description of the noisy hallway from the beginning", "They describe the weather outside after school", "They explain why the speaker counts the ceiling tiles", "They make a turn: after waiting all day for the bell, the speaker surprisingly wants to stay"],
+      a: 3, why: "A sonnet's couplet often makes a turn. The day that felt endless now goes too fast, and the speaker realizes part of them will miss it." },
+    { s: "s1", poem: "p2", q: "Read \"Grandma's Hands.\" Which feature shows that it is written in free verse?",
+      c: ["It has exactly three lines with 5, 7, and 5 syllables", "Every pair of lines rhymes", "Its lines have different lengths and no regular rhyme or rhythm", "It has 14 lines and ends with a rhyming couplet"],
+      a: 2, why: "Free verse has no set rhyme or rhythm, and line lengths change. Some lines here are one or two words long." },
+    { s: "s1", poem: "p2", q: "The poet breaks the last lines into very short pieces: \"and even then, / I think, / they keep waving.\" What is the effect of these line breaks?",
+      c: ["They slow the reader down so the ending, Grandma's love that keeps going, stands out", "They show that the speaker forgot the rest of the sentence", "They make the poem rhyme at the end", "They show that Grandma is too tired to keep waving"],
+      a: 0, why: "Short lines make you pause. The pauses stretch out the goodbye and put the focus on the idea that Grandma's love keeps going even when she can't be seen." },
+
+    // Station 2
+    { s: "s2", poem: "p3", q: "Read \"Storm Night.\" In line 1, \"The thunder grumbles like a hungry bear.\" What does this simile help the reader understand?",
+      c: ["The storm is happening in the woods near a bear's den", "The thunder is low, rumbling, and a little threatening", "The speaker is hungry and wants a snack", "The thunder is quiet and gentle"],
+      a: 1, why: "A hungry bear makes a deep, growling sound and feels dangerous. The simile makes the thunder sound low and scary." },
+    { s: "s2", poem: "p3", q: "Lines 3 through 5 say the rain \"drums its fingers on the glass ... impatient to come in.\" What type of figurative language is this, and what does it suggest?",
+      c: ["Hyperbole; it suggests the rain is the biggest storm ever", "Alliteration; it suggests the rain is making a pretty sound", "Personification; it suggests the rain is pushy, like a person who can't wait", "Idiom; it suggests the rain is a sign of good luck"],
+      a: 2, why: "Rain cannot have fingers or feel impatient. Giving it human actions is personification, and it makes the rain feel insistent and a little annoying." },
+    { s: "s2", poem: "p3", q: "Which line from the poem contains a METAPHOR?",
+      c: ["\"The wind is a wolf tonight\"", "\"shining like a freshly washed plate\"", "\"tap, tap, tap\"", "\"pacing the roof above my bed\""],
+      a: 0, why: "A metaphor says one thing IS another without like or as. The wind IS a wolf. Choice B uses like, so it is a simile." },
+    { s: "s2", poem: "p3", q: "In lines 8 and 9, the speaker says, \"I have pulled my blanket / a million miles over my head.\" Why does the poet use this hyperbole?",
+      c: ["To show that the speaker's blanket is very large", "To show how frightened the speaker feels during the storm", "To show that the speaker is getting ready to fall asleep", "To show that the storm is far away"],
+      a: 1, why: "No blanket goes a million miles. The huge exaggeration shows how badly the speaker wants to hide, which shows fear." },
+    { s: "s2", poem: "p3", q: "Which words from the poem are an example of ALLITERATION?",
+      c: ["\"hungry bear\"", "\"freshly washed plate\"", "\"howling down the chimney\"", "\"silent, sorry\""],
+      a: 3, why: "Silent and sorry both begin with the s sound. Repeating a beginning sound is alliteration." },
+    { s: "s2", poem: null, q: "After the storm, Dad said, \"Well, compared to last year's hurricane, that was a piece of cake.\" What does the idiom \"a piece of cake\" mean?",
+      c: ["Something that was easy to handle", "Something sweet to eat after a storm", "Something that was very frightening", "Something that is broken into parts"],
+      a: 0, why: "An idiom does not mean what the words say. \"A piece of cake\" means easy. Dad means this storm was easy compared to the hurricane." },
+
+    // Station 3
+    { s: "s3", poem: "p4", q: "Read \"The Tryout.\" Who is the speaker of the poem?",
+      c: ["The coach, who is deciding who makes the team", "A young athlete who worked hard but had a bad tryout", "A neighbor who watches kids play on Maple Street", "A narrator who is outside the story and uses no I or me"],
+      a: 1, why: "The speaker uses I and tells about practicing, missing shots at tryouts, and walking home. The speaker is the player." },
+    { s: "s3", poem: "p4", q: "How does the speaker's feeling change from stanza 3 to stanza 4?",
+      c: ["From proud to embarrassed", "From calm to angry", "From frustrated to determined", "From excited to bored"],
+      a: 2, why: "Kicking the can the whole length of the street shows frustration. Then the speaker stops, makes a perfect shot, and plans to practice tomorrow. That shows determination." },
+    { s: "s3", poem: "p4", q: "Which statement best expresses the THEME of the poem?",
+      c: ["Coaches should always look up from their clipboards.", "Basketball is a difficult sport to learn.", "Practicing in the afternoon is better than practicing in the morning.", "A setback is not a reason to quit; you keep working toward your goal."],
+      a: 3, why: "A theme is a life lesson that fits the whole poem. The speaker fails at the tryout but decides to practice again, so the lesson is about not giving up." },
+    { s: "s3", poem: "p4", q: "Which line BEST supports the theme of the poem?",
+      c: ["\"Tomorrow, a thousand more.\"", "\"until the porch light buzzed on,\"", "\"Coach wrote something on her clipboard\"", "\"the whole length of Maple Street.\""],
+      a: 0, why: "The last line shows the speaker choosing to keep practicing after failing. That is the clearest evidence for the theme of perseverance." },
+    { s: "s3", poem: "p4", q: "How does the poet develop the speaker's point of view?",
+      c: ["By describing what the coach thinks about each player", "By showing the speaker's own actions and feelings in first person, such as \"my hands were water\"", "By using a narrator who knows what every character is thinking", "By listing facts about how tryouts are run"],
+      a: 1, why: "The poem uses I and my, and we only learn what the speaker does and feels. \"My hands were water\" shows nervousness from the speaker's point of view." },
+    { s: "s3", poem: null, q: "Which of these is a THEME and not just a topic?",
+      c: ["Friendship", "Moving to a new town", "Courage can grow when we face what scares us.", "Thunderstorms"],
+      a: 2, why: "A topic is a word or phrase. A theme is a complete sentence that teaches a lesson about life. Only choice C is a full lesson." },
+
+    // Station 4
+    { s: "s4", poem: "p5", q: "Read \"Moving Day.\" Which word best describes the speaker's TONE?",
+      c: ["Wistful", "Excited", "Angry", "Silly"],
+      a: 0, why: "Wistful means quietly sad and longing for something. The speaker gently says goodbye to a home they love. Nothing in the poem is angry or excited." },
+    { s: "s4", poem: "p5", q: "Lines 4 and 5 say, \"My room echoes now. / Even my voice sounds borrowed.\" What MOOD do these lines create?",
+      c: ["Cheerful and busy", "Empty and lonely", "Scary and suspenseful", "Calm and cozy"],
+      a: 1, why: "An echoing room is empty. A voice that sounds borrowed means the speaker no longer feels at home. The reader feels the emptiness and loneliness." },
+    { s: "s4", poem: "p5", q: "In line 10, the poet writes, \"the truck growls, ready.\" What does the word \"growls\" suggest?",
+      c: ["The truck is broken and needs to be fixed", "The speaker's dog is riding in the truck", "The truck is quiet and patient", "The truck feels pushy and is hurrying the speaker to leave"],
+      a: 3, why: "Growls has a negative connotation, like an impatient animal. It makes the truck feel like it is pressuring the speaker to go." },
+    { s: "s4", poem: "p5", q: "The poem ends by comparing closing the door to closing \"a book / you aren't finished reading.\" What does this comparison show?",
+      c: ["The speaker likes to read before bed", "The speaker forgot to pack the books", "The speaker feels this part of life is ending before they were ready", "The speaker is glad the move is finally over"],
+      a: 2, why: "If you close a book before you finish, the story is cut short. The speaker feels that life in this home ended too soon." },
+    { s: "s4", poem: "p5", q: "If the poet changed \"then close the door gently\" to \"then slam the door,\" how would the TONE change?",
+      c: ["It would stay the same because both words mean shutting a door", "It would change from tender sadness to anger", "It would change from sadness to excitement", "It would change from anger to calm"],
+      a: 1, why: "Gently shows care and love for the home. Slam has an angry connotation. One word choice changes the whole attitude." },
+    { s: "s4", poem: "p5", q: "Line 1 says, \"The boxes stand like strangers in the hall.\" Why does the poet compare the boxes to strangers?",
+      c: ["To show that the home already feels unfamiliar to the speaker", "To show that the boxes are very tall", "To show that new neighbors have arrived", "To show that the speaker is afraid of the movers"],
+      a: 0, why: "Strangers are people you don't know. Things that once belonged in the speaker's room now feel unfamiliar, so the home already feels less like home." },
+
+    // Station 1 add-on: villanelle (kept at the end of the list so saved answers stay matched)
+    { s: "s1", poem: "p6", q: "Read \"Take My Time.\" Which form is this poem?",
+      c: ["A sonnet, because it has 14 lines and ends with a couplet", "A ballad, because it tells a long story about a test", "A villanelle, because it has 19 lines in five tercets and a final quatrain, with two lines that repeat as refrains", "A haiku, because each stanza has three lines"],
+      a: 2, why: "Count: 19 lines. There are five 3-line stanzas and one 4-line stanza, and lines 1 and 3 keep coming back as refrains. That is a villanelle. Three-line stanzas alone do not make a haiku." },
+    { s: "s1", poem: "p6", q: "What is the rhyme scheme of each 3-line stanza in the poem?",
+      c: ["AAB", "ABA", "ABB", "ABAB"],
+      a: 1, why: "time (A), clear (B), climb (A). Every tercet follows ABA, and the whole poem uses only two rhyme sounds: -ime and -ear." },
+    { s: "s1", poem: "p6", q: "The lines \"I read each line and take my time\" and \"The words will help me make the climb\" repeat throughout the poem and appear together at the end. How does this structure add to the poem's meaning?",
+      c: ["It shows that the speaker forgot what she already wrote", "It works like a calming reminder the speaker repeats, and joining the two lines at the end shows she feels confident and ready", "It shows that the speaker is bored and wants the test to be over", "It shows that the test has the same question over and over"],
+      a: 1, why: "In a villanelle, the refrains carry the big idea. The speaker repeats her test strategy like a pep talk, and putting both refrains together in the last stanza makes a final, confident promise." }
+  ]
+};
+if (typeof module !== "undefined") module.exports = REVIEW;
+
+</script>
+<script>
+(function(){
+const R=REVIEW, L=["A","B","C","D"]; R.questions.forEach((q,i)=>q.i=i);
+const ORDER=[]; R.stations.forEach(s=>R.questions.forEach(q=>{if(q.s===s.id)ORDER.push(q)})); ORDER.forEach((q,n)=>q.n=n+1);
+const app=document.getElementById("app");
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const st=id=>R.stations.find(s=>s.id===id);
+const KEY="reesPM2FollowAlong_v1";
+let S={ans:{},checked:{},view:"home",n:null,party:false};
+try{Object.assign(S,JSON.parse(localStorage.getItem(KEY)||"{}"));}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+const right=()=>ORDER.filter(q=>S.ans[q.n]===q.a&&S.checked[q.n]).length;
+const answered=()=>Object.keys(S.ans).length;
+function setScore(){document.getElementById("score").textContent=`⭐ ${right()} · ${answered()}/${ORDER.length} answered`;}
+function go(view,n){S.view=view;if(n!==undefined)S.n=n;save();render();scrollTo({top:0,behavior:"smooth"});}
+
+function render(){setScore(); if(S.view==="q") return qView(); if(S.view==="results") return results(); home();}
+
+function home(){
+  app.innerHTML=`<div class="tip"><span>👀</span><div>Watch the board and listen. When Mrs. Rees shows a question, tap that number below.</div></div>
+  ${R.stations.map((s,si)=>`<div class="st">${s.icon} Station ${si+1}: ${esc(s.name)}</div><div class="grid">
+    ${ORDER.filter(q=>q.s===s.id).map(q=>{const a=S.ans[q.n]; let mark=""; if(a!==undefined) mark=S.checked[q.n]?(a===q.a?"✅":"❌"):"🔒";
+      return `<button class="qb ${a!==undefined?"done":""}" style="background:${s.color}" data-n="${q.n}">${q.n}<small>${mark||"tap"}</small></button>`;}).join("")}
+  </div>`).join("")}
+  <div class="row" style="justify-content:center;margin-top:20px"><button class="btn" id="res">📊 My results</button></div>`;
+  app.querySelectorAll(".qb").forEach(b=>b.onclick=()=>go("q",+b.dataset.n));
+  document.getElementById("res").onclick=()=>go("results");
+}
+
+function poemHTML(pid){const p=R.poems[pid];let n=0;return `<details class="poem"><summary>📜 Show the poem: ${esc(p.title)}</summary><ol>${p.lines.map(l=>l===""?'<li class="gap"></li>':`<li><span class="n">${++n}</span><span>${esc(l)}</span></li>`).join("")}</ol></details>`;}
+
+function qView(){
+  const q=ORDER[S.n-1]; if(!q) return go("home");
+  const s=st(q.s), mine=S.ans[q.n], chk=!!S.checked[q.n];
+  const choices=q.c.map((c,ci)=>{let cls="ch"; if(chk){ if(ci===q.a)cls+=" right"; else if(ci===mine)cls+=" wrong"; } else if(ci===mine) cls+=" mine";
+    return `<button class="${cls}" data-ci="${ci}" ${mine!==undefined?"disabled":""}><span class="L">${L[ci]}</span><span>${esc(c)}</span></button>`;}).join("");
+  let foot="";
+  if(chk){const ok=mine===q.a; foot=`<div class="fb ${ok?"good":"bad"}"><b>${ok?"🎉 You got it!":"💡 Not quite. The answer is "+L[q.a]+"."}</b>${esc(q.why)}</div>`;}
+  else if(mine!==undefined){foot=`<div class="lock">🔒 Answer locked in! Eyes on the board.<br>When Mrs. Rees reveals the answer, tap the green button.</div>
+    <div class="row" style="justify-content:center"><button class="btn green" id="check">👀 Check my answer</button></div>`;}
+  const nextQ=ORDER[q.n];
+  app.innerHTML=`<div class="card"><span class="tag" style="background:${s.color}">${s.icon} ${esc(s.name)}</span>
+    <div class="qn">Question ${q.n}</div>
+    <div class="qtext">${esc(q.q)}</div>${choices}${foot}${q.poem?poemHTML(q.poem):""}
+    <div class="row"><button class="btn ghost" id="back">🔢 All questions</button>${nextQ?`<button class="btn ghost" id="nx">Question ${nextQ.n} ➜</button>`:`<button class="btn" id="res">📊 My results</button>`}</div></div>`;
+  app.querySelectorAll(".ch:not([disabled])").forEach(b=>b.onclick=()=>{
+    const ci=+b.dataset.ci;
+    if(!confirm("Lock in "+L[ci]+"? You only get one try.")) return;
+    S.ans[q.n]=ci; save(); render();
+  });
+  const ck=document.getElementById("check"); if(ck) ck.onclick=()=>{S.checked[q.n]=1;save();render();if(S.ans[q.n]===q.a)burst();};
+  document.getElementById("back").onclick=()=>go("home");
+  const nx=document.getElementById("nx"); if(nx) nx.onclick=()=>go("q",nextQ.n);
+  const rs=document.getElementById("res"); if(rs) rs.onclick=()=>go("results");
+}
+
+function results(){
+  // checking reveals results for any answered question
+  Object.keys(S.ans).forEach(n=>S.checked[n]=1); save(); setScore();
+  const r=right(), a=answered(), pct=a?Math.round(r/ORDER.length*100):0;
+  const missed=ORDER.filter(q=>S.ans[q.n]!==undefined&&S.ans[q.n]!==q.a);
+  const skipped=ORDER.filter(q=>S.ans[q.n]===undefined);
+  app.innerHTML=`<div class="card center"><div class="big">🏆🔑</div><h2 style="font-size:30px">My PM 2 Poetry Results</h2>
+    <div class="pts">${r} / ${ORDER.length}</div>
+    <p style="font-weight:800;font-size:20px">${pct>=85?"You are PM 2 ready! 🌟":pct>=70?"Almost there! Review what you missed. 💪":"Keep practicing. Review the key ideas! 📚"}</p>
+    <div>${R.stations.map((s,si)=>{const qs=ORDER.filter(q=>q.s===s.id);return `<span class="pill" style="background:${s.color}">${s.icon} Station ${si+1}: ${qs.filter(q=>S.ans[q.n]===q.a).length}/${qs.length}</span>`;}).join("")}</div>
+    ${missed.length?`<p style="font-weight:800;margin-bottom:4px">Review: ${missed.map(q=>"Q"+q.n).join(", ")}</p>`:""}
+    ${skipped.length?`<p style="font-weight:700;color:var(--muted);margin-top:4px">Not answered: ${skipped.map(q=>"Q"+q.n).join(", ")}</p>`:""}
+    <p style="font-weight:800">📸 Take a screenshot of this screen and turn it in on Canvas.</p>
+    <div class="row" style="justify-content:center"><button class="btn ghost" id="back">🔢 All questions</button><button class="btn" id="party">🎉 Celebrate</button></div></div>`;
+  document.getElementById("back").onclick=()=>go("home");
+  document.getElementById("party").onclick=()=>rain(3000);
+  rain(3500);
+}
+
+document.getElementById("reset").onclick=()=>{if(confirm("Erase all your answers and start over?")){S={ans:{},checked:{},view:"home",n:null};save();render();}};
+
+// confetti
+const cv=document.getElementById("confetti"),cx=cv.getContext("2d");let P=[],raf=null;const D=devicePixelRatio||1;
+function sz(){cv.width=innerWidth*D;cv.height=innerHeight*D;}addEventListener("resize",sz);sz();
+const C=["#7c3aed","#db2777","#0891b2","#ea580c","#f59e0b","#16a34a"];
+function sp(n,x,y,s){for(let i=0;i<n;i++)P.push({x:x*D,y:y*D,vx:(Math.random()-.5)*s*D,vy:(-Math.random()*s-3)*D*.8,z:(7+Math.random()*8)*D,r:Math.random()*6,vr:(Math.random()-.5)*.3,c:C[i%C.length],t:0});if(!raf)lp();}
+function lp(){cx.clearRect(0,0,cv.width,cv.height);P.forEach(p=>{p.vy+=.25*D;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;p.t++;cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.fillRect(-p.z/2,-p.z/4,p.z,p.z/2);cx.restore();});P=P.filter(p=>p.y<cv.height+40&&p.t<400);raf=P.length?requestAnimationFrame(lp):(cx.clearRect(0,0,cv.width,cv.height),null);}
+function burst(){sp(50,innerWidth/2,innerHeight*.5,16);}
+function rain(ms){const end=Date.now()+ms;(function f(){sp(14,Math.random()*innerWidth,-10,6);if(Date.now()<end)setTimeout(f,170);})();}
+
+render();
+})();
+</script>
+</body>
+</html>
